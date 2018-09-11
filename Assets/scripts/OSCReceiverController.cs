@@ -20,13 +20,25 @@ public class OSCReceiverController : MonoBehaviour {
     private Osc handler;
 
     // Signals received from the message
-    private int sig1  = 0;
-    private int sig2  = 0;
+    public float sig1;
+    public float sig2;
 
     // The object to moidfy in the scene
     public GameObject m_ObjectToUse;
 
     #endregion
+
+    ~OSCReceiverController()
+    {
+        if (handler != null)
+        {
+            handler.Cancel();
+        }
+
+        // speed up finalization
+        handler = null;
+        System.GC.Collect();
+    }
 
 
     // Use this for initialization
@@ -67,8 +79,8 @@ public class OSCReceiverController : MonoBehaviour {
         Debug.Log("Message Values > " + message.Values[0] + " " + message.Values[1]);
 
         // Get the two first values from the message 
-        sig1 = (int)message.Values[0];
-        sig2 = (int)message.Values[1];
+        sig1 = (float)message.Values[0];
+        sig2 = (float)message.Values[1];
 
     }
 }

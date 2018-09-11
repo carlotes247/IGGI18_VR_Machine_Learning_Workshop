@@ -173,10 +173,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 20}
-  - component: {fileID: 39}
   - component: {fileID: 38}
   - component: {fileID: 37}
-  - component: {fileID: 16}
+  - component: {fileID: 23}
   m_Layer: 0
   m_Name: OSCEmpty
   m_TagString: Untagged
@@ -203,21 +202,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &16
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 14}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1076c7fcdd03394983e6a641f68a410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RemoteIP: 127.0.0.1
-  SendToPort: 6448
-  ListenerPort: 12000
-  m_ObjectToUse: {fileID: 0}
 --- !u!4 &17
 Transform:
   m_ObjectHideFlags: 0
@@ -319,6 +303,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &23
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 14}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1076c7fcdd03394983e6a641f68a410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RemoteIP: 127.0.0.1
+  SendToPort: 5000
+  ListenerPort: 12000
+  sig1: 0
+  sig2: 0
+  m_ObjectToUse: {fileID: 0}
 --- !u!23 &24
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -504,17 +505,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8627fad8411074bacd0e2b01d4f145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &39
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 14}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb97546b70e670d4e81300dd8f80376d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  remoteIp: 10.0.1.12
-  sendToPort: 8000
-  listenerPort: 9000

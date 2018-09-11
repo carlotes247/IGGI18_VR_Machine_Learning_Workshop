@@ -12,8 +12,8 @@ public class OSCTestSender : MonoBehaviour
 
     private Osc oscHandler;
 
-    public string remoteIp;
-    public int sendToPort;
+    public string remoteIp = "127.0.0.1";
+    public int sendToPort = 6448;
     public int listenerPort;
 
 
@@ -35,9 +35,21 @@ public class OSCTestSender : MonoBehaviour
     void Update()
     {
         //Debug.LogWarning("time = " + Time.time);
-       
-        OscMessage oscM = Osc.StringToOscMessage("/test1 TRUE 23 0.501 bla");
-        oscHandler.Send(oscM);  
+
+        //OscMessage oscM = Osc.StringToOscMessage("/test1 TRUE 23 0.501 bla");
+        //oscHandler.Send(oscM); 
+
+        OscMessage msgToSend = new OscMessage();
+        msgToSend.Address = "/wek/inputs";
+        //msgToSend.Values.Add(Input.mousePosition.x);
+        //msgToSend.Values.Add(Input.mousePosition.y);
+
+        msgToSend.Values.Add(8);
+
+
+        oscHandler.Send(msgToSend);
+
+
     }
 
     /// <summary>
@@ -68,7 +80,17 @@ public class OSCTestSender : MonoBehaviour
 	    oscHandler = GetComponent<Osc>();
         oscHandler.init(udp);
         
-        oscHandler.SetAddressHandler("/hand1", Example);
+        oscHandler.SetAddressHandler("/wek/inputs", Example);
+
+        // Copy of code from Leap Motion
+        OscMessage msg = new OscMessage();
+        msg.Address = "/wek/inputs";
+        msg.Values.Add(8);
+        msg.Values.Add(10);
+
+        oscHandler.Send(msg);
+
+        
     }
 
     public static void Example(OscMessage m)

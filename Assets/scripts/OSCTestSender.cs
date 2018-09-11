@@ -46,18 +46,8 @@ public class OSCTestSender : MonoBehaviour
 
         msgToSend.Values.Add(8);
 
-
         oscHandler.Send(msgToSend);
 
-
-    }
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
-    {
-       
     }
 
     void OnDisable()

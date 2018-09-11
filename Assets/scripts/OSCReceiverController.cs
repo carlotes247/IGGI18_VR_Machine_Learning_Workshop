@@ -17,7 +17,7 @@ public class OSCReceiverController : MonoBehaviour {
     public int ListenerPort  = 12000;
 
     // OSC message handler
-    private Osc handler;
+    private Osc oscHandler;
 
     // Signals received from the message
     public float sig1;
@@ -30,13 +30,13 @@ public class OSCReceiverController : MonoBehaviour {
 
     ~OSCReceiverController()
     {
-        if (handler != null)
+        if (oscHandler != null)
         {
-            handler.Cancel();
+            oscHandler.Cancel();
         }
 
         // speed up finalization
-        handler = null;
+        oscHandler = null;
         System.GC.Collect();
     }
 
@@ -48,11 +48,11 @@ public class OSCReceiverController : MonoBehaviour {
 
         UDPPacketIO udp = GetComponent<UDPPacketIO>();
         udp.init(RemoteIP, SendToPort, ListenerPort);
-        handler = GetComponent<Osc>();
-        handler.init(udp);
+        oscHandler = GetComponent<Osc>();
+        oscHandler.init(udp);
 
         //Tell Unity to call function Example1 when message /wek/outputs arrives
-        handler.SetAddressHandler("/wek/outputs", Example1);
+        oscHandler.SetAddressHandler("/wek/outputs", Example1);
 
         // Find the GameObject we want to use if it is not set up from the inspector
         if (m_ObjectToUse == null)
@@ -67,6 +67,14 @@ public class OSCReceiverController : MonoBehaviour {
         // Apply the rotation from the two signals received
         m_ObjectToUse.transform.Rotate(0, sig1, sig2);
 	}
+
+    private void OnDisable()
+    {
+        // close OSC UDP socket
+        Debug.Log("closing OSC UDP socket in OnDisable");
+        oscHandler.Cancel();
+        oscHandler = null;
+    }
 
     /// <summary>
     /// Example method that is called when /wek/outputs arrives (specified on Start)
